@@ -5,6 +5,14 @@ const express = require('express');
 const path = require('path');
 const api = require('./parse')
 
+const WEAPP =   require('./utils/wx')
+
+const WeApp = new WEAPP({
+    appid: process.env.WEI_XIN_APPID,
+    secret: process.env.WEI_XIN_SECRET,
+})
+global.WeApp = WeApp
+
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
@@ -17,6 +25,9 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 // Serve the Parse API on the /parse URL prefix
 const mountPath = process.env.PARSE_SERVER_MOUNT_PATH || '/parse';
 app.use(mountPath, api);
+
+const wxRouter = require('./router/wx')
+app.use('/wx', wxRouter)
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function (req, res) {
