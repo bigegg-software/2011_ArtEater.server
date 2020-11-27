@@ -27,6 +27,10 @@ if (process.env.S3_BUCKET) {
 
 const options = {
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseOptions: {
+    user: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD
+  },
   cloud: process.env.PARSE_SERVER_CLOUD || __dirname + '/cloud/main.js',
   appId: process.env.PARSE_SERVER_APPLICATION_ID || 'myAppId',
   masterKey: process.env.PARSE_SERVER_MASTER_KEY || 'myMasterKey', //Add your master key here. Keep it secret!
