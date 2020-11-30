@@ -75,6 +75,9 @@ const Subjects = {
         },
         has_down_level: {
             type: 'boolean',
+        },
+        backgroundImg: {
+            type: 'string',
         }
     },
     CLP: {
