@@ -23,6 +23,14 @@ router.post('/login', async function (req, res, next) {
     console.log("userInfo",userInfo);
     res.send({code:200,data:userInfo});
 });
+router.post('/getOpenId', async function (req, res, next) {
+    console.log('req.params',req.params, req.body, req.query);
+    let code = req.body.code;
+    let access_token = await WeApp.getAccessToken();
+    console.log("access_token",access_token);
+    let open_id = await WeApp.getOpenId(code);
+    res.send({code:200,data:open_id});
+});
 router.post('/getwxcode', async function (req, res, next) {
     let scene = req.body.scene;
     let page = req.body.page;
