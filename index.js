@@ -18,6 +18,9 @@ global.WeApp = WeApp
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 const app = express();
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
