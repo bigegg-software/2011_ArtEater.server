@@ -34,6 +34,7 @@ const options = {
   cloud: process.env.PARSE_SERVER_CLOUD || __dirname + '/cloud/main.js',
   appId: process.env.PARSE_SERVER_APPLICATION_ID || 'myAppId',
   masterKey: process.env.PARSE_SERVER_MASTER_KEY || 'myMasterKey', //Add your master key here. Keep it secret!
+  restAPIKey: process.env.PARSE_SERVER_REST_API_KEY,
   serverURL: process.env.PARSE_PUBLIC_SERVER_URL || 'http://localhost:1337/api/1',  // Don't forget to change to https if needed
   maxUploadSize: process.env.PARSE_SERVER_MAX_UPLOAD_SIZE,
   cacheMaxSize: parseInt(process.env.PARSE_SERVER_CACHE_MAX_SIZE),
