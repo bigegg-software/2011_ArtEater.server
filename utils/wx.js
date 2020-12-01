@@ -77,7 +77,7 @@ class WeApp {
         let result = await data.json()
         console.log("getOpenId",result)
         // await this._saveToken(result.openid)
-        return result.openid
+        return result
     }
 
     async getAccessToken() {

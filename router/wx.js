@@ -7,7 +7,8 @@ router.post('/login', async function (req, res, next) {
     let code = req.body.code;
     let access_token = await WeApp.getAccessToken();
     console.log("access_token",access_token);
-    let open_id = await WeApp.getOpenId(code);
+    let openInfo = await WeApp.getOpenId(code);
+    let open_id = openInfo.openid
     // open_id = 'oKyXV5OM1E6WdD5KT8b2_qbKoGsA' //todo：测试用的，正式后删除
     const query = new Parse.Query(Parse.User);
     query.equalTo("username",open_id);  // find all the women
