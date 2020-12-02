@@ -35,9 +35,9 @@ const _User = {
         realname: {
             type: 'string',
         },
-        // role: {
-        //     type: 'string',
-        // },
+        role: {
+            type: 'string',
+        },
         amount: {
             type: 'number',
         },
@@ -356,8 +356,37 @@ const SignInHistory = {
         delete: { 'requiresAuthentication': true },
     },
 }
+const Opinions = {
+    className: 'Opinions',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        isAnonymous: {
+            type: 'number',
+        },
+        nickName: {
+            type: 'string',
+        },
+        phone: {
+            type: 'string',
+        },
+        content: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
-    SignInHistory,_User
+    SignInHistory,_User,Opinions
 ])
