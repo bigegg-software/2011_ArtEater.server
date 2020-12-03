@@ -27,7 +27,7 @@ const _User = {
             type: 'string',
         },
         university: {
-            type: 'string',
+            type: 'array',
         },
         phone: {
             type: 'string',
@@ -274,7 +274,7 @@ const Message = {
             type: 'string',
         },
         content: {
-            type: 'array',
+            type: 'string',
         }
     },
     CLP: {
@@ -316,7 +316,7 @@ const QuestionHistory = {
             type: 'string',
         },
         subjectId: {
-            type: 'array',
+            type: 'string',
         },
         questIndex: {
             type: 'number',
@@ -325,7 +325,7 @@ const QuestionHistory = {
             type: 'number',
         },
         isImportant: {
-            type: 'boolean',
+            type: 'number',
         }
     },
     CLP: {
