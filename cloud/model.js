@@ -385,8 +385,49 @@ const Opinions = {
         delete: { 'requiresAuthentication': true },
     },
 }
+const TestHistory = {
+    className: 'TestHistory',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        examName: {
+            type: 'number',
+        },
+        examId: {
+            type: 'string',
+        },
+        seconds: {
+            type: 'string',
+        },
+        allscore: {
+            type: 'number',
+        },
+        score: {
+            type: 'number',
+        },
+        pass_score: {
+            type: 'number',
+        },
+        questions: {
+            type: 'array',
+        },
+        answers: {
+            type: 'array',
+        },
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
-    SignInHistory,_User,Opinions
+    SignInHistory,_User,Opinions,TestHistory
 ])
