@@ -392,7 +392,7 @@ const TestHistory = {
             type: 'string',
         },
         examName: {
-            type: 'number',
+            type: 'string',
         },
         examId: {
             type: 'string',
