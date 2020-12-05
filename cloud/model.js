@@ -398,7 +398,7 @@ const TestHistory = {
             type: 'string',
         },
         seconds: {
-            type: 'string',
+            type: 'number',
         },
         allscore: {
             type: 'number',
