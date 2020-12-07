@@ -33,15 +33,15 @@ router.post('/getOpenId', async function(req, res, next) {
     let open_id = await WeApp.getOpenId(code);
     res.send({ code: 200, data: open_id });
 });
-router.post('/getwxcode', async function(req, res, next) {
-    let scene = req.body.scene;
-    let page = req.body.page;
-    // sceneValue,curPage
-    let access_token = await WeApp.getAccessToken();
-    console.log("access_token", access_token);
-    let wxcode = await WeApp.getwxcode(access_token, scene, page);
-    res.send({ code: 200, data: wxcode });
-});
+// router.post('/getwxcode', async function(req, res, next) {
+//     let scene = req.body.scene;
+//     let page = req.body.page;
+//     // sceneValue,curPage
+//     let access_token = await WeApp.getAccessToken();
+//     console.log("access_token", access_token);
+//     let wxcode = await WeApp.getwxcode(access_token, scene, page);
+//     res.send({ code: 200, data: wxcode });
+// });
 
 
 router.post("/pay_notification", async function(req, res) {

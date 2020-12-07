@@ -75,9 +75,9 @@ Parse.Cloud.define('initiatePayment', async (request) => {
 
 
 
-Parse.Cloud.run('initiatePayment', {
-    price: 10,
-},{sessionToken: 'r:c62ec7d6a9c71a46c8f40b49b2ca7fb9'})
+// Parse.Cloud.run('initiatePayment', {
+//     price: 10,
+// },{sessionToken: 'r:c62ec7d6a9c71a46c8f40b49b2ca7fb9'})
 
 
 
