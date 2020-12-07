@@ -34,6 +34,10 @@ app.use('/wx', wxRouter)
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function (req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
 });
 
