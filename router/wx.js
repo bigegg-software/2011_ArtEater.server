@@ -44,27 +44,44 @@ router.post('/getOpenId', async function(req, res, next) {
 // });
 
 
-router.post("/pay_notification", async function(req, res) {
-    console.log("pay_notification===",req)
-    wxpay.useWXCallback(async (msg, req, res, next) => {
-        console.log("payment-callback");
-        // 处理商户业务逻辑
-        validateSign(msg);
-        const {
-            result_code,
-            err_code,
-            err_code_des,
-            out_trade_no,
-            time_end,
-            transaction_id,
-            bank_type
-        } = msg;
-        console.log("payment-callback",result_code,err_code,transaction_id);
-        //todo 更新wechatpay 
-        //todo 更新的订单
-    })
+// router.post("/pay_notification", async function(req, res) {
+//     console.log("pay_notification===",req)
+//     wxpay.useWXCallback(async (msg, req, res, next) => {
+//         console.log("payment-callback");
+//         // 处理商户业务逻辑
+//         validateSign(msg);
+//         const {
+//             result_code,
+//             err_code,
+//             err_code_des,
+//             out_trade_no,
+//             time_end,
+//             transaction_id,
+//             bank_type
+//         } = msg;
+//         console.log("payment-callback",result_code,err_code,transaction_id);
+//         //todo 更新wechatpay 
+//         //todo 更新的订单
+//     })
 
-});
+// });
+router.post("/pay_notification", wxpay.useWXCallback(async (msg, req, res, next) => {
+    console.log("payment-callback");
+    // 处理商户业务逻辑
+    validateSign(msg);
+    const {
+        result_code,
+        err_code,
+        err_code_des,
+        out_trade_no,
+        time_end,
+        transaction_id,
+        bank_type
+    } = msg;
+    console.log("payment-callback",result_code,err_code,transaction_id);
+    //todo 更新wechatpay 
+    //todo 更新的订单
+}));
 
 
 module.exports = router;
