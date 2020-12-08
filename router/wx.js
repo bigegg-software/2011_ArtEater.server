@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { validateSign } = require("../utils/wxUtils");
 const wxpay = require("../utils/wxpay");
+let Order = Parse.Object.extend("Order");
 
 router.post('/login', async function(req, res, next) {
     console.log('req.params', req.params, req.body, req.query);
@@ -33,54 +34,21 @@ router.post('/getOpenId', async function(req, res, next) {
     let open_id = await WeApp.getOpenId(code);
     res.send({ code: 200, data: open_id });
 });
-// router.post('/getwxcode', async function(req, res, next) {
-//     let scene = req.body.scene;
-//     let page = req.body.page;
-//     // sceneValue,curPage
-//     let access_token = await WeApp.getAccessToken();
-//     console.log("access_token", access_token);
-//     let wxcode = await WeApp.getwxcode(access_token, scene, page);
-//     res.send({ code: 200, data: wxcode });
-// });
-
-
-// router.post("/pay_notification", async function(req, res) {
-//     console.log("pay_notification===",req)
-//     wxpay.useWXCallback(async (msg, req, res, next) => {
-//         console.log("payment-callback");
-//         // 处理商户业务逻辑
-//         validateSign(msg);
-//         const {
-//             result_code,
-//             err_code,
-//             err_code_des,
-//             out_trade_no,
-//             time_end,
-//             transaction_id,
-//             bank_type
-//         } = msg;
-//         console.log("payment-callback",result_code,err_code,transaction_id);
-//         //todo 更新wechatpay 
-//         //todo 更新的订单
-//     })
-
-// });
 router.post("/pay_notification", wxpay.useWXCallback(async (msg, req, res, next) => {
-    console.log("payment-callback");
     // 处理商户业务逻辑
     validateSign(msg);
-    const {
-        result_code,
-        err_code,
-        err_code_des,
-        out_trade_no,
-        time_end,
-        transaction_id,
-        bank_type
-    } = msg;
-    console.log("payment-callback",result_code,err_code,transaction_id);
-    //todo 更新wechatpay 
-    //todo 更新的订单
+    //更新订单
+    if (msg.result_code == 'SUCCESS'){
+        let orderQ = new Parse.Query(Order);
+        orderQ.equalTo("orderNo",msg.out_trade_no)
+        let orderList = await orderQ.find()
+        if(orderList.length > 0){
+            let orderInfo = orderList[0];
+            orderInfo.set('wechatPayOrderId',msg.transaction_id)
+            await orderInfo.save(null,{ useMasterKey: true })
+        }
+    }
+    
 }));
 
 
