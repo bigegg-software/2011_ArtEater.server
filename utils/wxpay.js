@@ -14,6 +14,7 @@ const wxpay = WXPay({
   appid: process.env.WEIXIN_APPID,
   mch_id: process.env.WEIXIN_MCHID,
   partner_key: process.env.WEIXIN_PAY_SECRET, //微信商户平台 API secret，非小程序 secret
+  notify_url:process.env.WEIXIN_NOTIFY_URL,
   pfx: fs.readFileSync("./apiclient_cert.p12") //微信商户平台证书，暂不需要
 });
 
