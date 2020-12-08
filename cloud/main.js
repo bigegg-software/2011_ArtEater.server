@@ -55,14 +55,14 @@ Parse.Cloud.define('initiatePayment', async (request) => {
                 package: `prepay_id=${wechatPay.prepayId}`,
                 signType: "MD5",
                 nonceStr: String(Math.random()),
-                tradeId:wechatPay.tradeId
             };
 
             payload.paySign = wxpay.sign(payload);
 
             const result = {
                 payload: payload,
-                weChatPayId: wechatPay.objectId
+                weChatPayId: wechatPay.objectId,
+                tradeId:wechatPay.tradeId
             };
             console.log("initiatePayment success", result);
             resolve(result);
