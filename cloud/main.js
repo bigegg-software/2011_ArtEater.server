@@ -54,7 +54,8 @@ Parse.Cloud.define('initiatePayment', async (request) => {
                 timeStamp: String(Math.floor(Date.now() / 1000)),
                 package: `prepay_id=${wechatPay.prepayId}`,
                 signType: "MD5",
-                nonceStr: String(Math.random())
+                nonceStr: String(Math.random()),
+                tradeId:wechatPay.tradeId
             };
 
             payload.paySign = wxpay.sign(payload);
