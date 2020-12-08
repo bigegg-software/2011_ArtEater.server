@@ -8,8 +8,8 @@ const api = require('./parse')
 const WEAPP =   require('./utils/wx')
 
 const WeApp = new WEAPP({
-    appid: process.env.WEI_XIN_APPID,
-    secret: process.env.WEI_XIN_SECRET,
+    appid: process.env.WEIXIN_APPID,
+    secret: process.env.WEIXIN_SECRET,
 })
 global.WeApp = WeApp
 

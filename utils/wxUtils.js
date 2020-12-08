@@ -71,7 +71,6 @@ const sendTemplateMessage = (
 // 从 Global 中获取 access——token
 const getAccessToken = global =>
   JSON.parse(global.attributes.value).access_token;
-
 // 发送订阅消息
 // POST https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN
 const sendSubscribeMessage = (access_token, touser, template_id, page, data) =>
