@@ -40,7 +40,7 @@ const createWechatPay = (user, price, ip) => {
                     trade_type: wechatPay.tradeType
                 },
                 async function(err, result) {
-                    console.log(result)
+                    console.log("utils/api==",result)
                     wechatPay.prepayId = result.prepay_id
                     let info =  await new WechatPay(wechatPay).save( null, { useMasterKey: true })            
                     resolve(info.toJSON());
