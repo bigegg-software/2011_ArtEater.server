@@ -212,6 +212,9 @@ const ErrorHistory = {
         },
         openid: {
             type: 'string',
+        },
+        count: {
+            type: 'number',
         }
     },
     CLP: {
@@ -426,8 +429,28 @@ const TestHistory = {
         delete: { 'requiresAuthentication': true },
     },
 }
+const RightHistory = {
+    className: 'RightHistory',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        questions: {
+            type: 'array',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
-    SignInHistory,_User,Opinions,TestHistory
+    SignInHistory,_User,Opinions,TestHistory,RightHistory
 ])
