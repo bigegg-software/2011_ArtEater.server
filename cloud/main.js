@@ -1,4 +1,4 @@
-// require('./model');
+require('./model');
 require('../utils/wx');
 const Data = require("../utils/data.js");
 const Api = require("../utils/api.js");
