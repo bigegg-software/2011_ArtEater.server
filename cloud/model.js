@@ -329,6 +329,9 @@ const QuestionHistory = {
         },
         isImportant: {
             type: 'number',
+        },
+        count: {
+            type: 'number',
         }
     },
     CLP: {
