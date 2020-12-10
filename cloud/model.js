@@ -106,7 +106,7 @@ const TestQuestions = {
             type: 'number',
         },
         images: {
-            type: 'string',
+            type: 'array',
         },
         options: {
             type: 'array',
@@ -116,6 +116,9 @@ const TestQuestions = {
         },
         comments: {
             type: 'string',
+        },
+        updatedBy: {
+            type: 'string'
         }
     },
     CLP: {
