@@ -488,9 +488,12 @@ const RightHistory = {
         delete: { 'requiresAuthentication': true },
     },
 }
-const CouponInfo = {
-    className: 'CouponInfo',
+const CouponRecord = {
+    className: 'CouponRecord',
     fields: {
+        openid: {
+            type: 'string', 
+        },
         couponName: {
             type: 'string',
         },
@@ -520,12 +523,9 @@ const CouponInfo = {
         delete: { 'requiresAuthentication': true },
     },
 }
-const CouponRecord = {
-    className: 'CouponRecord',
+const CouponInfo = {
+    className: 'CouponInfo',
     fields: {
-        openid: {
-            type: 'string', 
-        },
         couponName: {
             type: 'string',
         },
