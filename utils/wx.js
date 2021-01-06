@@ -7,6 +7,7 @@ const FormData = require('form-data');
 const fs = require('fs')
 const path = require('path')
 const request = require('request')
+var https = require("https");
 
 class Store {
     constructor() {
@@ -87,8 +88,58 @@ class WeApp {
         return result.access_token
     }
     async getwxcode(access_token,sceneValue,curPage) {
-        // let data = await fetch(`https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`)
-        // let result = await data.json()
+
+        return new Promise((resolve, reject)=>{
+            var data =  {"scene": sceneValue,
+                            "page": curPage,
+                            "width": 300,
+                            'is_hyaline': true
+                        }
+            data = JSON.stringify(data);
+            var options = {
+                method: "POST",
+                host: "api.weixin.qq.com",
+                path: '/wxa/getwxacodeunlimit?access_token=' + access_token,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Content-Length": data.length
+                }
+            };
+            var req = https.request(options, function (res) {
+                res.setEncoding("binary");
+                var imgData = "";
+                res.on('data', function (chunk) {
+                    imgData += chunk;
+                });
+                res.on("end", function () {
+                    resolve(imgData)
+                });
+            });
+            req.write(data);
+            req.end();
+        })
+
+
+        let result = await fetch(`https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`, {
+            method: 'POST',
+            // headers: {
+            //     accept: '*/*',
+            // },
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                scene: sceneValue,
+                page:curPage,
+                width: 430
+            }),
+            responseType: 'stream'
+        })
+        console.log('sceneValue',sceneValue)
+        console.log('curPage',curPage)
+        console.log('curPage',result.body)
+        
+        return result.body
+
+
         let url = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`
         return new Promise((resolve, reject) => {
             const req = request.post(

@@ -43,6 +43,9 @@ const _User = {
         },
         score: {
             type: 'number',
+        },
+        score_all: {
+            type: 'number',
         }
     },
     CLP: {
@@ -77,6 +80,15 @@ const Subjects = {
             type: 'boolean',
         },
         backgroundImg: {
+            type: 'string',
+        },
+        minScore: {
+            type: 'number',
+        },
+        maxScoreMoney: {
+            type: 'number',
+        },
+        comments: {
             type: 'string',
         }
     },
@@ -134,6 +146,15 @@ const TestQuestions = {
 const Order = {
     className: 'Order',
     fields: {
+        couponAmount: {
+            type: 'number',
+        },
+        scoreAmount: {
+            type: 'number',
+        },
+        couponId: {
+            type: 'string',
+        },
         orderNo: {
             type: 'string',
         },
@@ -188,6 +209,15 @@ const ActionConfig = {
             type: 'number',
         },
         updatedBy: {
+            type: 'string',
+        },
+        minScore: {
+            type: 'number',
+        },
+        maxScoreMoney: {
+            type: 'number',
+        },
+        comments: {
             type: 'string',
         }
     },
@@ -335,6 +365,9 @@ const QuestionHistory = {
         },
         count: {
             type: 'number',
+        },
+        answers:{
+            type: 'array',
         }
     },
     CLP: {
@@ -455,8 +488,187 @@ const RightHistory = {
         delete: { 'requiresAuthentication': true },
     },
 }
+const CouponInfo = {
+    className: 'CouponInfo',
+    fields: {
+        couponName: {
+            type: 'string',
+        },
+        amount: {
+            type: 'number',
+        },
+        useTime: {
+            type: 'date',
+        },
+        orderNo: {
+            type: 'array',
+        },
+        state: {
+            type: 'number',
+        },
+        useEndTime: {
+            type: 'date',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const CouponRecord = {
+    className: 'CouponRecord',
+    fields: {
+        openid: {
+            type: 'string', 
+        },
+        couponName: {
+            type: 'string',
+        },
+        amount: {
+            type: 'number',
+        },
+        createBy: {
+            type: 'string',
+        },
+        useEndTime: {
+            type: 'date',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 're./≥;/quiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const ExamRecord = {
+    className: 'ExamRecord',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        questionId: {
+            type: 'string',
+        },
+        subjectId: {
+            type: 'string',
+        },
+        result: {
+            type: 'boolean',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
+const ScoreRecord = {
+    className: 'ScoreRecord',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        channel: {
+            type: 'string',
+        },
+        extend: {
+            type: 'string',
+        },
+        score: {
+            type: 'number',
+        },
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
+const WechatPay = {
+    className: 'WechatPay',
+    fields: {
+        prepayId: {
+            type: 'string',
+        },
+        ip: {
+            type: 'string',
+        },
+        user: {
+            type: 'pointer',
+            targetClass: '_User'
+        },
+        productDescription: {
+            type: 'string',
+        },
+        status: {
+            type: 'string',
+        },
+        amount: {
+            type: 'number',
+        },
+        tradeType: {
+            type: 'string',
+        },
+        tradeId: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const SubjectProgress = {
+    className: 'SubjectProgress',
+    fields: {
+        openid: {
+            type: 'string',
+        },
+        isImportant: {
+            type: 'number',
+        },
+        subjectId: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
 
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
-    SignInHistory,_User,Opinions,TestHistory,RightHistory
+    SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
+    CouponInfo,ExamRecord,ScoreRecord,WechatPay,SubjectProgress
 ])

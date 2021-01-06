@@ -53,6 +53,6 @@ const options = {
 };
 
 console.log('s3 options', s3options);
-console.log('parse options', options);
+// console.log('parse options', options);
 
 module.exports = new ParseServer(options);
