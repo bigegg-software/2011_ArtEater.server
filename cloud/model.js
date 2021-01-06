@@ -501,7 +501,7 @@ const CouponInfo = {
             type: 'date',
         },
         orderNo: {
-            type: 'array',
+            type: 'string',
         },
         state: {
             type: 'number',
@@ -545,7 +545,7 @@ const CouponRecord = {
         count: { '*': true },
         get: { '*': true },
         create: { 'requiresAuthentication': true },
-        update: { 're./≥;/quiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
         delete: { 'requiresAuthentication': true },
     },
 }
