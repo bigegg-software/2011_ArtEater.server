@@ -88,7 +88,7 @@ class WeApp {
         return result.access_token
     }
     async getwxcode(access_token,sceneValue,curPage) {
-
+        console.log("sceneValue",sceneValue,curPage,curPage)
         return new Promise((resolve, reject)=>{
             var data =  {"scene": sceneValue,
                             "page": curPage,

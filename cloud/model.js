@@ -61,6 +61,9 @@ const _User = {
 const Subjects = {
     className: 'Subjects',
     fields: {
+        headImg: {
+            type: 'string',
+        },
         subject_name: {
             type: 'string',
         },
@@ -105,6 +108,9 @@ const Subjects = {
 const TestQuestions = {
     className: 'TestQuestions',
     fields: {
+        accuracy: {
+            type: 'number',
+        },
         subjects: {
             type: 'array',
         },
@@ -653,6 +659,85 @@ const SubjectProgress = {
         },
         subjectId: {
             type: 'string',
+        },
+        subjectIndex: {
+            type: 'number',
+        },
+        quesCount: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
+const Sharebg = {
+    className: 'Sharebg',
+    fields: {
+        area: {
+            type: 'string',
+        },
+        title: {
+            type: 'string',
+        },
+        img: {
+            type: 'string',
+        },
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const OldExams = {
+    className: 'OldExams',
+    fields: {
+        name: {
+            type: 'string',
+        },
+        content: {
+            type: 'string',
+        },
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const QuestReport = {
+    className: 'QuestReport',
+    fields: {
+        questionId: {
+            type: 'string',
+        },
+        date: {
+            type: 'string',
+        },
+        accuracy: {
+            type: 'string',
         }
     },
     CLP: {
@@ -670,5 +755,6 @@ const SubjectProgress = {
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
-    CouponInfo,ExamRecord,ScoreRecord,WechatPay,SubjectProgress
+    CouponInfo,ExamRecord,ScoreRecord,WechatPay,SubjectProgress,
+    Sharebg,OldExams,QuestReport
 ])
