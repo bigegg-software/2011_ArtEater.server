@@ -737,7 +737,7 @@ const QuestReport = {
             type: 'string',
         },
         accuracy: {
-            type: 'string',
+            type: 'number',
         }
     },
     CLP: {
