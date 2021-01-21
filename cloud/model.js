@@ -517,6 +517,21 @@ const CouponRecord = {
         },
         useEndTime: {
             type: 'date',
+        },
+        tipName: {
+            type: 'string',
+        },
+        tipContent: {
+            type: 'string',
+        },
+        mode: {
+            type: 'string',
+        },
+        productType: {
+            type: 'string',
+        },
+        couponId: {
+            type: 'string',
         }
     },
     CLP: {
@@ -543,6 +558,15 @@ const CouponInfo = {
         },
         useEndTime: {
             type: 'date',
+        },
+        tipName: {
+            type: 'string',
+        },
+        tipContent: {
+            type: 'string',
+        },
+        productType: {
+            type: 'string',
         }
     },
     CLP: {
