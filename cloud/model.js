@@ -774,11 +774,189 @@ const QuestReport = {
         delete: { 'requiresAuthentication': true },
     },
 }
+const Banner = {
+    className: 'Banner',
+    fields: {
+        title: {
+            type: 'string',
+        },
+        img: {
+            type: 'string',
+        },
+        src: {
+            type: 'string',
+        },
+        sort: {
+            type: 'string',
+        },
+        state: {
+            type: 'number',
+        },
+        remark: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const Recommend = {
+    className: 'Recommend',
+    fields: {
+        title: {
+            type: 'string',
+        },
+        headImg: {
+            type: 'string',
+        },
+        courseId: {
+            type: 'string',
+        },
+        videoId: {
+            type: 'string',
+        },
+        videoName: {
+            type: 'string',
+        },
+        href: {
+            type: 'string',
+        },
+        updatedBy: {
+            type: 'string',
+        },
+        remark: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const Courses = {
+    className: 'Courses',
+    fields: {
+        courseName: {
+            type: 'string',
+        },
+        price: {
+            type: 'number',
+        },
+        level: {
+            type: 'number',
+        },
+        parent_ID: {
+            type: 'string',
+        },
+        has_down_level: {
+            type: 'boolean',
+        },
+        comments: {
+            type: 'string',
+        },
+        maxScoreMoney: {
+            type: 'number',
+        },
+        minScore: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const Video = {
+    className: 'Video',
+    fields: {
+        courseIds: {
+            type: 'array',
+        },
+        title: {
+            type: 'string',
+        },
+        videoSrc: {
+            type: 'string',
+        },
+        coverUrl: {
+            type: 'string',
+        },
+        href: {
+            type: 'string',
+        },
+        updatedBy: {
+            type: 'string',
+        },
+        remark: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+const Activity = {
+    className: 'Activity',
+    fields: {
+        products: {
+            type: 'array',
+        },
+        title: {
+            type: 'string',
+        },
+        price: {
+            type: 'number',
+        },
+        maxScoreMoney: {
+            type: 'number',
+        },
+        minScore: {
+            type: 'number',
+        },
+        updatedBy: {
+            type: 'string',
+        },
+        comments: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 
 
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
     CouponInfo,ExamRecord,ScoreRecord,WechatPay,SubjectProgress,
-    Sharebg,OldExams,QuestReport
+    Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity
 ])
