@@ -1103,6 +1103,10 @@ const CoursesModule = {
         order: {
             type: 'number',
         },
+        //flag
+        flag: {
+            type: 'number',
+        },
         //负责讲师头像
         portrait: {
             type: 'array',
