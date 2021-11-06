@@ -1130,7 +1130,27 @@ const CoursesModule = {
         //课程头图
         headImg: {
             type: 'array',
-        }
+        },
+        //课程介绍
+        introduce : {
+            type: 'string',
+        },
+        // 等级
+        level: {
+            type: 'number',
+        },
+        //父级是否是有子级  
+        has_down_level: {
+            type: 'boolean',
+        },
+        // 父级Id
+        parent_ID: {
+            type: 'string',
+        },
+        //根节点Id 
+        rootId: {
+            type: 'string',
+        },
     },
     CLP: {
         addField: {},
