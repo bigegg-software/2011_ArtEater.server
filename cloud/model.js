@@ -137,6 +137,11 @@ const TestQuestions = {
         },
         updatedBy: {
             type: 'string'
+        },
+        //标签
+        tag: {
+            type: 'pointer',
+            targetClass: 'LabelManagement'
         }
     },
     CLP: {
@@ -952,11 +957,328 @@ const Activity = {
         delete: { 'requiresAuthentication': true },
     },
 }
+//标签管理
+const LabelManagement = {
+    className: 'LabelManagement',
+    fields: {
+        //标签名称
+        tagName: {
+            type: 'string',
+        },
+        //注释
+        note: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//会员类型 
+const MemberType = {
+    className: 'MemberType',
+    fields: {
+        //会员名称
+        memberName: {
+            type: 'string',
+        },
+        //会员原价
+        memberPrice: {
+            type: 'string',
+        },
+        //截止日期
+        expirationDate: {
+            type: 'date',
+        },
+        //会员有效期
+        memberPeriod: {
+            type: 'string',
+        },
+        //购买说明
+        explain: {
+            type: 'string',
+        },
+        //会员优惠价格
+        promotionPrice: {
+            type: 'number',
+        },
+        //封面图
+        surface: {
+            type: 'string',
+        },
+        //封面图ID
+        surfaceId: {
+            type: 'number',
+        },
+        //会员类型名称
+        typeName: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//首页模块
+const Module = {
+    className: 'Module',
+    fields: {
+        //模块名称
+        name: {
+            type: 'string',
+        },
+        //展示数量
+        showAmount: {
+            type: 'number',
+        },
+        //展示顺序
+        order: {
+            type: 'number',
+        },
+        //更新人
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//课程管理 3.0新课程，和2.0没关联  新表
+const CoursesModule = {
+    className: 'CoursesModule',
+    fields: {
+        //课程名称
+        subjectName: {
+            type: 'string',
+        },
+        //副标题1
+        subTitle1: {
+            type: 'string',
+        },
+        //副标题2
+        subTitle2: {
+            type: 'string',
+        },
+        //是否是VIP课程
+        vip: {
+            type: 'boolean',
+        },
+        //是否隐藏课程
+        hide: {
+            type: 'boolean',
+        },
+        //上架
+        putaway: {
+            type: 'boolean',
+        },
+        //种类
+        kind: {
+            type: 'number',
+        },
+        //标签
+        tag: {
+            type: 'pointer',
+            targetClass: 'LabelManagement'
+        },
+        //顺序
+        order: {
+            type: 'number',
+        },
+        //负责讲师头像
+        portrait: {
+            type: 'array',
+        },
+        //负责讲师姓名
+        lecturerName: {
+            type: 'string',
+        },
+        //课程链接
+        link: {
+            type: 'string',
+        },
+        //课程说明
+        explain: {
+            type: 'string',
+        },
+        //课程链接时长
+        duration: {
+            type: 'number',
+        },
+        //课程头图
+        headImg: {
+            type: 'array',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//模块关联课程
+const ModuleAssociatedCourses = {
+    className: 'ModuleAssociatedCourses',
+    fields: {
+        //封面图
+        surface: {
+            type: 'string',
+        },
+        //标题
+        title: {
+            type: 'string',
+        },
+        //副标题
+        subTitle: {
+            type: 'string',
+        },
+        //展示顺序
+        order: {
+            type: 'number',
+        },
+        //N值
+        N: {
+            type: 'number',
+        },
+        //基数
+        baseNum: {
+            type: 'number',
+        },
+        //模块
+        module: {
+            type: 'pointer',
+            targetClass: 'Module'
+        },
+        //课程
+        baseNum: {
+            type: 'pointer',
+            targetClass: 'CoursesModule'
+        },
+        //课程试听 1 首页模块为 undefined
+        courseListening: {
+            type: 'number',
+        },
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 
-
+//课程收藏
+const Collections = {
+    className: 'Collections',
+    fields: {
+        //用户标识
+        openId: {
+            type: 'string',
+        },
+        //收藏的课程objectId
+        ids: {
+            type: 'array',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//课程正在学习/上次学习
+const Learning = {
+    className: 'Learning',
+    fields: {
+        //用户标识
+        openId: {
+            type: 'string',
+        },
+        //正在学习的课程objectId
+        ids: {
+            type: 'array',
+        },
+        //上次学习的课程objectId
+        preIds: {
+            type: 'object',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//课程正在学习/上次学习
+const Member = {
+    className: 'Member',
+    fields: {
+        //用户标识
+        openId: {
+            type: 'string',
+        },
+        //订单编号
+        orderArr: {
+            type: 'array',
+        },
+        //会员类型
+        memberType: {
+            type: 'string',
+        },
+        //到期时间
+        endTime: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
     CouponInfo,ExamRecord,ScoreRecord,WechatPay,SubjectProgress,
-    Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity
+    Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity,
+
+    LabelManagement,MemberType,Module,CoursesModule,ModuleAssociatedCourses,Collections,
+    Learning,Member
 ])
