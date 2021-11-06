@@ -1151,6 +1151,10 @@ const CoursesModule = {
         rootId: {
             type: 'string',
         },
+        //推荐课程
+        recommendCourse:{
+            type: 'array',
+        }
     },
     CLP: {
         addField: {},
