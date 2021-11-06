@@ -994,7 +994,7 @@ const MemberType = {
         },
         //截止日期
         expirationDate: {
-            type: 'date',
+            type: 'string',
         },
         //会员有效期
         memberPeriod: {
