@@ -1243,8 +1243,8 @@ const Learning = {
     },
 }
 //课程正在学习/上次学习
-const Member = {
-    className: 'Member',
+const MemberList = {
+    className: 'MemberList',
     fields: {
         //用户标识
         openId: {
@@ -1280,5 +1280,6 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity,
 
     LabelManagement,MemberType,Module,CoursesModule,ModuleAssociatedCourses,Collections,
-    Learning,Member
+    Learning,MemberList
+
 ])
