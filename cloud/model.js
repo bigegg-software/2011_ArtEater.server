@@ -1273,6 +1273,33 @@ const MemberList = {
         delete: { 'requiresAuthentication': true },
     },
 }
+//默认封面
+const DefaultCover = {
+    className: 'DefaultCover',
+    fields: {
+        //封面链接
+        surface: {
+            type: 'array',
+        },
+        //是否使用
+        isUse: {
+            type: 'boolean',
+        },
+        //更新人
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
@@ -1280,6 +1307,6 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity,
 
     LabelManagement,MemberType,Module,CoursesModule,ModuleAssociatedCourses,Collections,
-    Learning,MemberList
+    Learning,MemberList,DefaultCover
 
 ])
