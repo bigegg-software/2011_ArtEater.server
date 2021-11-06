@@ -1121,7 +1121,7 @@ const CoursesModule = {
         },
         //课程链接时长
         duration: {
-            type: 'number',
+            type: 'string',
         },
         //课程头图
         headImg: {
