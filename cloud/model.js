@@ -1201,8 +1201,7 @@ const ModuleAssociatedCourses = {
         },
         //课程
         baseNum: {
-            type: 'pointer',
-            targetClass: 'CoursesModule'
+            type: 'number',
         },
         //课程试听 1 首页模块为 undefined
         courseListening: {
