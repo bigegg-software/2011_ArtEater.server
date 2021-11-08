@@ -1208,6 +1208,14 @@ const ModuleAssociatedCourses = {
         courseListening: {
             type: 'number',
         },
+        updatedBy  : {
+            type: 'string',
+        },
+         //课程
+         course : {
+            type: 'pointer',
+            targetClass: 'CoursesModule'
+        },
     },
     CLP: {
         addField: {},
