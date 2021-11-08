@@ -1172,7 +1172,7 @@ const ModuleAssociatedCourses = {
     fields: {
         //封面图
         surface: {
-            type: 'string',
+            type: 'array',
         },
         //标题
         title: {
