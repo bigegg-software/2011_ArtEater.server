@@ -1296,6 +1296,18 @@ const MemberList = {
         //到期时间
         endTime: {
             type: 'number',
+        },
+        //手机号
+        phone  : {
+            type: 'string',
+        },
+        //昵称
+        nickName : {
+            type: 'string',
+        },
+        //真实姓名
+        realName: {
+            type: 'string',
         }
     },
     CLP: {
