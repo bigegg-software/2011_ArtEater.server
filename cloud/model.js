@@ -1215,6 +1215,10 @@ const ModuleAssociatedCourses = {
             type: 'pointer',
             targetClass: 'CoursesModule'
         },
+        //真实值
+        realNum : {
+            type: 'number',
+       },
     },
     CLP: {
         addField: {},
