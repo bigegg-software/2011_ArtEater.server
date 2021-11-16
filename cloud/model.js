@@ -1312,6 +1312,9 @@ const MemberList = {
         //真实姓名
         realName: {
             type: 'string',
+        },
+        status: {
+            type: 'number',
         }
     },
     CLP: {
