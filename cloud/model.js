@@ -322,6 +322,9 @@ const Message = {
         },
         content: {
             type: 'string',
+        },
+        surface: {
+            type: 'array',
         }
     },
     CLP: {
