@@ -46,6 +46,9 @@ const _User = {
         },
         score_all: {
             type: 'number',
+        },
+        label: {
+            type: 'string',
         }
     },
     CLP: {
