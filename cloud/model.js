@@ -1160,6 +1160,10 @@ const CoursesModule = {
         //推荐课程
         recommendCourse:{
             type: 'array',
+        },
+        //课程排序
+        innerOrder:{
+            type: 'number',
         }
     },
     CLP: {
