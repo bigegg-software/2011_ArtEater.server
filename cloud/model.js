@@ -52,6 +52,9 @@ const _User = {
         },
         memberType: {
             type: 'number',
+        },
+        parentOpenId: {
+            type: 'string',
         }
     },
     CLP: {
@@ -1335,6 +1338,10 @@ const MemberList = {
         },
         status: {
             type: 'number',
+        },
+        //是否是黑金升级
+        Upgrade: {
+            type: 'boolean',
         }
     },
     CLP: {
@@ -1625,7 +1632,42 @@ const PullNew = {
         //姓名
         name: {
             type: 'string',
+        },
+        //总共购买次数
+        buyNum:{
+            type: 'number',
+        },
+        //升级黑金总共购买次数
+        upgradeBuyNum:{
+            type: 'number',
         }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//优惠券消息发送列表
+const CouponMessage = {
+    className: 'CouponMessage',
+    fields: {
+        
+        openid: {
+            type: 'string',
+        },
+        //意见反馈内容
+        content: {
+            type: 'string',
+        },
+        //回复消息内容
+        message: {
+            type: 'string',
+        },
     },
     CLP: {
         addField: {},
@@ -1647,6 +1689,6 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Learning,MemberList,DefaultCover,
 
     BulletinBoard,ActiveManagement,NewCouponInfo,NewCouponRecord,ChannelManagement,
-    PullNew
+    PullNew,CouponMessage
 
 ])
