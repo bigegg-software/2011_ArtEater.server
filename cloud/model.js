@@ -49,6 +49,9 @@ const _User = {
         },
         label: {
             type: 'string',
+        },
+        memberType: {
+            type: 'number',
         }
     },
     CLP: {
@@ -431,6 +434,9 @@ const Opinions = {
             type: 'string',
         },
         content: {
+            type: 'string',
+        },
+        message: {
             type: 'string',
         }
     },
@@ -1025,6 +1031,10 @@ const MemberType = {
         //会员类型名称
         typeName: {
             type: 'string',
+        },
+        
+        limitNumber: {
+            type: 'number',
         }
     },
     CLP: {
@@ -1364,6 +1374,269 @@ const DefaultCover = {
         delete: { 'requiresAuthentication': true },
     },
 }
+//公告栏
+const BulletinBoard = {
+    className: 'BulletinBoard',
+    fields: {
+        //公告名称
+        bulletiname: {
+            type: 'array',
+        },
+        //公告类型
+        type: {
+            type: 'number',
+        },
+        //是否展示
+        isShow: {
+            type: 'boolean',
+        },
+        //活动信息-H5链接
+        link: {
+            type: 'string',
+        },
+         //公告信息
+        informationBulletin: {
+            type: 'string',
+        },
+        //更新人
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
+//活动管理
+const ActiveManagement = {
+    className: 'ActiveManagement',
+    fields: {
+        //活动底图
+        baseMap: {
+            type: 'string',
+        },
+        //活动标题
+        title: {
+            type: 'string',
+        },
+        //黑金活动价格
+        blackActivePrice: {
+            type: 'number',
+        },
+        //铂金活动价格
+        platinumActivePrice: {
+            type: 'number',
+        },
+         //白银活动价格
+         silverActivePrice: {
+            type: 'number',
+        },
+        //活动链接
+        link: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//新优惠卷
+const NewCouponInfo = {
+    className: 'NewCouponInfo',
+    fields: {
+        //优惠卷金额
+        amount: {
+            type: 'number',
+        },
+        //优惠卷名称
+        couponName: {
+            type: 'string',
+        },
+        //优惠卷使用范围
+        couponRange: {
+            type: 'string',
+        },
+        //优惠卷类型
+        couponType: {
+            type: 'string',
+        },
+         //添加人
+         createBy: {
+            type: 'string',
+        },
+        //使用截止时间
+        useEndTime: {
+            type: 'date',
+        },
+        //有效期
+        termValidity: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//新手动发送优惠卷记录
+const NewCouponRecord = {
+    className: 'NewCouponRecord',
+    fields: {
+        //优惠卷金额
+        amount: {
+            type: 'number',
+        },
+        //优惠卷名称
+        couponName: {
+            type: 'string',
+        },
+        //优惠卷使用范围
+        couponRange: {
+            type: 'string',
+        },
+        //优惠卷类型
+        couponType: {
+            type: 'string',
+        },
+        //优惠卷objectId
+        couponId: {
+            type: 'string',
+        },
+         //使用截止时间
+         useEndTime: {
+            type: 'date',
+        },
+        //发送优惠卷(部分学生发送或全部学生发送)
+        mode: {
+            type: 'string',
+        },
+        //用户openid
+        openid: {
+            type: 'string',
+        },
+        //使用时间
+        useTime: {
+            type: 'date',
+        },
+        //用户有没有使用优惠劵
+        state: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//渠道管理 
+const ChannelManagement = {
+    className: 'ChannelManagement',
+    fields: {
+        //活动底图
+        baseMap: {
+            type: 'string',
+        },
+        //渠道名称
+        channelName: {
+            type: 'string',
+        },
+        //黑金活动价格
+        blackActivePrice: {
+            type: 'number',
+        },
+        //铂金活动价格
+        platinumActivePrice: {
+            type: 'number',
+        },
+         //白银活动价格
+         silverActivePrice: {
+            type: 'number',
+        },
+        //分成比例
+        divideInto: {
+            type: 'string',
+        },
+        //提成总金额
+        TotalAmountCommission: {
+            type: 'number',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//拉新列表 
+const PullNew = {
+    className: 'PullNew',
+    fields: {
+        //会员昵称
+        nickName: {
+            type: 'string',
+        },
+        //会员类型
+        memberType: {
+            type: 'number',
+        },
+        //是否已处理
+        isDispose: {
+            type: 'boolean',
+        },
+        //手机号
+        phone: {
+            type: 'number',
+        },
+         //拉新人数
+         buyUser: {
+            type: 'array',
+        },
+        //升级黑金拉新
+        upgradeBuyArr: {
+            type: 'array',
+        },
+        //姓名
+        name: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
@@ -1371,6 +1644,9 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Sharebg,OldExams,QuestReport,Banner,Recommend,Courses,Video,Activity,
 
     LabelManagement,MemberType,Module,CoursesModule,ModuleAssociatedCourses,Collections,
-    Learning,MemberList,DefaultCover
+    Learning,MemberList,DefaultCover,
+
+    BulletinBoard,ActiveManagement,NewCouponInfo,NewCouponRecord,ChannelManagement,
+    PullNew
 
 ])
