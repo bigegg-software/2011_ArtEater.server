@@ -1619,7 +1619,7 @@ const PullNew = {
         },
         //手机号
         phone: {
-            type: 'number',
+            type: 'string',
         },
          //拉新人数
          buyUser: {
