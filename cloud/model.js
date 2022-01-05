@@ -1703,7 +1703,7 @@ const RoyaltyBill = {
             type: 'number',
         },
         //提成
-        commissionOrice: {
+        commissionPrice: {
             type: 'number',
         },
         openid: {
