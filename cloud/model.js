@@ -1386,7 +1386,7 @@ const BulletinBoard = {
     className: 'BulletinBoard',
     fields: {
         //公告名称
-        bulletiname: {
+        bulletinName: {
             type: 'array',
         },
         //公告类型
@@ -1679,6 +1679,45 @@ const CouponMessage = {
         delete: { 'requiresAuthentication': true },
     },
 }
+//渠道提成列表
+const RoyaltyBill = {
+    className: 'RoyaltyBill',
+    fields: {
+        //会员类型
+        memberType: {
+            type: 'string',
+        },
+        //父级id
+        parentId: {
+            type: 'string',
+        },
+        //价格
+        price: {
+            type: 'number',
+        },
+        //提成
+        commissionOrice: {
+            type: 'number',
+        },
+        openid: {
+            type: 'string',
+        },
+        //手机号
+        phone: {
+            type: 'string',
+        },
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//渠道提成列表
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
     SignInHistory,_User,Opinions,TestHistory,RightHistory,CouponRecord,
@@ -1689,6 +1728,6 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Learning,MemberList,DefaultCover,
 
     BulletinBoard,ActiveManagement,NewCouponInfo,NewCouponRecord,ChannelManagement,
-    PullNew,CouponMessage
+    PullNew,CouponMessage,RoyaltyBill
 
 ])
