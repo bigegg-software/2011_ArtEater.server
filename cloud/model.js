@@ -1387,7 +1387,7 @@ const BulletinBoard = {
     fields: {
         //公告名称
         bulletinName: {
-            type: 'array',
+            type: 'string',
         },
         //公告类型
         type: {
