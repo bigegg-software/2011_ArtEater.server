@@ -1645,6 +1645,9 @@ const PullNew = {
         recruits:{
             type: 'array',
         },
+        openid: {
+            type: 'string',
+        }
     },
     CLP: {
         addField: {},
