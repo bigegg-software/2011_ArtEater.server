@@ -1640,7 +1640,11 @@ const PullNew = {
         //升级黑金总共购买次数
         upgradeBuyNum:{
             type: 'number',
-        }
+        },
+        //recruits
+        recruits:{
+            type: 'array',
+        },
     },
     CLP: {
         addField: {},
