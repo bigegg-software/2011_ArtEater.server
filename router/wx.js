@@ -3,6 +3,7 @@ var router = express.Router();
 const { validateSign } = require("../utils/wxUtils");
 const wxpay = require("../utils/wxpay");
 let Order = Parse.Object.extend("Order");
+var fetch = require('node-fetch');
 
 router.post('/login', async function (req, res, next) {
     console.log('req.params', req.params, req.body, req.query);
@@ -50,6 +51,30 @@ router.post("/pay_notification", wxpay.useWXCallback(async (msg, req, res, next)
     }
 
 }));
+//获取二维码
+router.post('/getUnlimitedBarcode', async function (req, res, next) {
+    console.log('req.params', req.params, req.body, req.query);
+    let openid = req.body.openid;
+    let access_token = await WeApp.getAccessToken();
+    let result = await WeApp.getwxcode(access_token, `id=${openid}`, 'pages/index/index?code=' + openid);
+    console.log("getUnlimitedBarcode result",result)
+    if(result.length > 0 && typeof(result) == 'string'){
+        console.log("wxcode", typeof(result));
+        let base64data = new Buffer(result, 'binary').toString('base64');
+        var data = { base64: base64data };
+        var imageFile = new Parse.File('resume.jpeg', data);
+        let file = await imageFile.save()
+        console.log("file", file._url)
+        if (file && file._url){
+            res.send({ code: 200, data: file._url });
+        }else {
+            res.send({ code: 400, data: "保存图片失败"});
+        }
+    }else {
+        res.send({ code: 400, data: "获取小程序码失败"});
+    }
+    
+});
 
 router.post('/getUnlimitedCode', async function (req, res, next) {
     console.log('req.params', req.params, req.body, req.query);

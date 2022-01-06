@@ -92,8 +92,14 @@ class WeApp {
         return new Promise((resolve, reject)=>{
             var data =  {"scene": sceneValue,
                             "page": curPage,
-                            "width": 300,
-                            'is_hyaline': true
+                            "width": 298,
+                            "auto_color": false,
+                            'is_hyaline': true,
+                            "line_color": {
+                                "r": "0",
+                                "g": "0",
+                                "b": "0"
+                            }
                         }
             data = JSON.stringify(data);
             var options = {
@@ -118,62 +124,6 @@ class WeApp {
             req.write(data);
             req.end();
         })
-
-
-        let result = await fetch(`https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`, {
-            method: 'POST',
-            // headers: {
-            //     accept: '*/*',
-            // },
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                scene: sceneValue,
-                page:curPage,
-                width: 430
-            }),
-            responseType: 'stream'
-        })
-        console.log('sceneValue',sceneValue)
-        console.log('curPage',curPage)
-        console.log('curPage',result.body)
-        
-        return result.body
-
-
-        let url = `https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=${access_token}`
-        return new Promise((resolve, reject) => {
-            const req = request.post(
-                {
-                    url,
-                    headers: {
-                        accept: '*/*',
-                    },
-                    data: {
-                        "scene":sceneValue,
-                        "page":curPage
-                    }
-                },
-                (err, res) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    try {
-                        console.log("wechat code",res);
-                        const resData = JSON.parse(res.body); // 里面带有返回的media_id
-
-                        resolve(resData);
-                    } catch (e) {
-                        console.log(e)
-                    }
-                },
-            );
-
-            const form = req.form();
-            form.append('media', imgStram);
-            form.append('hack', ''); // 微信服务器的bug，需要hack一下才能识别到对象
-        });
-        // await this._saveToken(result.access_token)
-        // return result
     }
 
     async sendMessage(body) {
