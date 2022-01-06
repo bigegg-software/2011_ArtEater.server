@@ -1385,6 +1385,9 @@ const DefaultCover = {
 const BulletinBoard = {
     className: 'BulletinBoard',
     fields: {
+        title: {
+            type: 'string',
+        },
         //公告名称
         bulletinName: {
             type: 'string',
