@@ -1650,6 +1650,10 @@ const PullNew = {
         },
         openid: {
             type: 'string',
+        },
+        //黑金拉新人数
+        blackPullUser: {
+            type: 'number',
         }
     },
     CLP: {
