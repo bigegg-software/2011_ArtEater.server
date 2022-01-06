@@ -56,7 +56,7 @@ router.post('/getUnlimitedBarcode', async function (req, res, next) {
     console.log('req.params', req.params, req.body, req.query);
     let openid = req.body.openid;
     let access_token = await WeApp.getAccessToken();
-    let result = await WeApp.getwxcode(access_token, `id=${openid}`, 'pages/index/index');
+    let result = await WeApp.getwxcode(access_token, `${openid}`, 'pages/index/index');
     console.log("getUnlimitedBarcode result",result)
     if(result.length > 0 && typeof(result) == 'string'){
         console.log("wxcode", typeof(result));
