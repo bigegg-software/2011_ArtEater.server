@@ -1654,6 +1654,10 @@ const PullNew = {
         //黑金拉新人数
         blackPullUser: {
             type: 'number',
+        },
+        //黑金拉新人数数组
+        blackPullUserArr:{
+            type: 'array',
         }
     },
     CLP: {
