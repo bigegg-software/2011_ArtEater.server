@@ -832,6 +832,10 @@ const Recommend = {
         title: {
             type: 'string',
         },
+        //副标题
+        subtitle: {
+            type: 'string',
+        },
         headImg: {
             type: 'string',
         },
