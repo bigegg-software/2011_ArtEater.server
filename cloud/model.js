@@ -1776,6 +1776,10 @@ const DailyCourse = {
         updatedBy: {
             type: 'string',
         },
+        //真实点击量
+        realNum:{
+            type: 'number',
+        }
     },
     CLP: {
         addField: {},
