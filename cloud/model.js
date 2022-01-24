@@ -1181,6 +1181,10 @@ const CoursesModule = {
         //课程排序
         innerOrder:{
             type: 'number',
+        },
+        //课程列表头图
+        listImg:{
+            type: 'array',
         }
     },
     CLP: {
@@ -1739,6 +1743,78 @@ const RoyaltyBill = {
         delete: { 'requiresAuthentication': true },
     },
 }
+//每日新知-课程
+const DailyCourse = {
+    className: 'DailyCourse',
+    fields: {
+        //封面图
+        surface: {
+            type: 'array',
+        },
+        //标题
+        title: {
+            type: 'string',
+        },
+        //副标题
+        subTitle: {
+            type: 'string',
+        },
+        //N值
+        N: {
+            type: 'number',
+        },
+        //基数
+        baseNum: {
+            type: 'number',
+        },
+        //课程
+        course: {
+            type: 'pointer',
+            targetClass: 'CoursesModule'
+        },
+        //更新人
+        updatedBy: {
+            type: 'string',
+        },
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+//每日新知-教师头像
+const DailyTeacher = {
+    className: 'DailyTeacher',
+    fields: {
+        //头像
+        portrait: {
+            type: 'array',
+        },
+        //教师名称
+        name: {
+            type: 'string',
+        },
+        //更新人
+        updatedBy: {
+            type: 'string',
+        }
+    },
+    CLP: {
+        addField: {},
+        find: { '*': true },
+        count: { '*': true },
+        get: { '*': true },
+        create: { 'requiresAuthentication': true },
+        update: { 'requiresAuthentication': true },
+        delete: { 'requiresAuthentication': true },
+    },
+}
+
 //渠道提成列表
 SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     ErrorHistory,ExamPaper,Message,MessageReadHistory,QuestionHistory,
@@ -1750,6 +1826,6 @@ SchemaConfig.config([Subjects,TestQuestions,Order,ActionConfig,
     Learning,MemberList,DefaultCover,
 
     BulletinBoard,ActiveManagement,NewCouponInfo,NewCouponRecord,ChannelManagement,
-    PullNew,CouponMessage,RoyaltyBill
+    PullNew,CouponMessage,RoyaltyBill,DailyCourse,DailyTeacher
 
 ])
