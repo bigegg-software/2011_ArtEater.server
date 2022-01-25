@@ -35,7 +35,28 @@ async function importDailyCourse() {
     
     // console.log("courses",courses);
 }
-
+async function updateDailyCourse() {
+    let q = new Parse.Query(DailyCourse);
+    let courses = await q.find()
+    for (let i = 0; i < courses.length; i ++){
+        let course = courses[i];
+        let courseInfo = course.toJSON()
+        let q = new Parse.Query(ModuleAssociatedCourses);
+        q.equalTo("title",courseInfo.title)
+        let courseAssio = await q.first()
+        courseAssio = courseAssio.toJSON();
+        console.log('courseAssio.createdAt',courseAssio.createdAt)
+        continue;
+        await course.save({
+            "createdAt":courseAssio.createdAt,
+            "updatedAt":courseAssio.updatedAt
+        }, { useMasterKey: true })
+    }
+    
+    // console.log("courses",courses);
+}
 setTimeout(async () => {
-    await importDailyCourse()
+    // await importDailyCourse()
+    await updateDailyCourse();
+
 }, 2000);
