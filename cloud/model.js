@@ -856,6 +856,10 @@ const Recommend = {
         },
         remark: {
             type: 'string',
+        },
+        //隐藏课程
+        hideCourse:{
+            type: 'boolean',
         }
     },
     CLP: {
