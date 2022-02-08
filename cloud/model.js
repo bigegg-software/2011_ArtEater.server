@@ -1561,6 +1561,10 @@ const NewCouponRecord = {
         //用户有没有使用优惠劵
         state: {
             type: 'number',
+        },
+        //发送人
+        sendBy: {
+            type: 'string',
         }
     },
     CLP: {
