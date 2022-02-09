@@ -61,9 +61,10 @@ async function updateDailyCourse() {
 }
 
 async function getNewCouponRecordList() {
-    let data = {"search_type":'blackGold'};
+    let data = {};
     let query1 = new Parse.Query(NewCouponRecord);
     let query2 = new Parse.Query(NewCouponRecord);
+    console.log(new Date())
     
     if (data.search_keyword){
         query1.contains("couponName", data.search_keyword);
@@ -80,36 +81,32 @@ async function getNewCouponRecordList() {
         query.lessThan("createdAt", new Date(new Date(data.search_end_date).getTime() + 24*60*60*1000));
     }
     // query.descending("createdAt");
-    // let counts = await query.count();
-    // query.limit(counts);
+    let array = []
+    query.include("user");
+    let counts = await query.count();
+    for (let i = 0 ; i <= counts/1000; i ++){
+        query.skip(i*1000)
+        query.limit(1000)
+        let newDatas = await query.find()
+        array = array.concat(newDatas)
+    }
     let couponList = [];
     let titles = ['序号','优惠券名称', '优惠券类型', '优惠券金额','发送时间',
     '操作人','使用人ID','使用人手机号','使用情况','使用时间'];
     couponList.push(titles);
     let i = 0;
-    await query.each(async item=>{
-        i ++
+    console.log(new Date())
+    array.map(item=>{
+        i ++;
         item = item.toJSON()
-        let openid = item.openid
-        let userQ = new Parse.Query(User);
-        userQ.equalTo("openid",openid)
-        let userInfo = await userQ.first()
-        userInfo = userInfo.toJSON();
-        item.userId = userInfo.objectId;
-        item.phone = userInfo.phone;
-        
         let couponRange = getCouponRange(item.couponRange)
         let state = getCouponState(item.state)
         let useTime = item.state == 2 ? item.updatedAt : '--'
         let couponInfo = [i,item.couponName,couponRange,item.amount,item.createdAt,
-        item.sendBy,item.userId,item.phone,state,useTime,]
+        item.sendBy,item.user.objectId,item.user.phone,state,useTime,]
         couponList.push(couponInfo)
-        console.log(i)
-        // if (i == 10){
-        //     return
-        // }
     })
-    // console.log("==========",couponList)
+    console.log(new Date())
     var buffer = xlsx.build([
         {
           name: 'sheet1',
@@ -119,6 +116,7 @@ async function getNewCouponRecordList() {
     let xlsx_data = JSON.parse(JSON.stringify(buffer));
     var parseFile = new Parse.File('coupon_record_list.xlsx', xlsx_data.data);
     let file_url = await parseFile.save();
+
     console.log("======file_url====",file_url._url)
     // return file_url;
 }
@@ -185,9 +183,30 @@ function getCouponRange(type){
 }
 
 
+async function updateNewCouponUser() {
+    
+    let query = new Parse.Query(NewCouponRecord);
+    let count = await query.count()
+    console.log("count:",count)
+    let i = 0;
+    await query.each(async coupon=>{
+        i ++
+        item = coupon.toJSON()
+        let openid = item.openid
+        let userQ = new Parse.Query(User);
+        userQ.equalTo("openid",openid)
+        let userInfo = await userQ.first()
+        await coupon.save({
+            "user":userInfo
+        },{useMasterKey:true})
+        console.log("i:",i)
+
+    })
+}
 setTimeout(async () => {
     // await importDailyCourse()
     // await updateDailyCourse();
     // await getNewCouponRecordList()
+    // await updateNewCouponUser()
 
 }, 2000);
