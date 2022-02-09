@@ -1554,6 +1554,11 @@ const NewCouponRecord = {
         openid: {
             type: 'string',
         },
+        //用户信息
+        user: {
+            type: 'pointer',
+            targetClass: '_User'
+        },
         //使用时间
         useTime: {
             type: 'date',
