@@ -3,6 +3,7 @@ require('../utils/wx');
 const Data = require("../utils/data.js");
 const Api = require("../utils/api.js");
 const wxpay = require("../utils/wxpay");
+let NewCouponRecord = Parse.Object.extend('NewCouponRecord')
 
 Parse.Cloud.define('psng', async (req) => {
   return 'pong';
@@ -73,12 +74,133 @@ Parse.Cloud.define('initiatePayment', async (request) => {
     });
 })
 
+//获取优惠券记录列表
+Parse.Cloud.define('getNewCouponRecordList', async (req) => {
+    let data = req.params;
+    let query1 = new Parse.Query(NewCouponRecord);
+    let query2 = new Parse.Query(NewCouponRecord);
+    
+    if (data.search_keyword){
+        query1.contains("couponName", data.search_keyword);
+        query2.contains("sendBy", data.search_keyword);
+    }
+    let query = Parse.Query.or(query1,query2);
+    if (data.search_type) {
+        query.equalTo("couponRange", data.search_type);
+    }
+    if (data.search_start_date) {
+        query.greaterThan("createdAt", new Date(data.search_start_date));
+      }
+    if (data.search_end_date) {
+        query.lessThan("createdAt", new Date(new Date(data.search_end_date).getTime() + 24*60*60*1000));
+    }
+    // query.descending("createdAt");
+    // let counts = await query.count();
+    // query.limit(counts);
+    let couponList = [];
+    let titles = ['序号','优惠券名称', '优惠券类型', '优惠券金额','发送时间',
+    '操作人','使用人ID','使用人手机号','使用情况','使用时间'];
+    couponList.push(titles);
+    let i = 0;
+    await query.each(async item=>{
+        i ++
+        item = item.toJSON()
+        let openid = item.openid
+        let userQ = new Parse.Query(User);
+        userQ.equalTo("openid",openid)
+        let userInfo = await userQ.first()
+        userInfo = userInfo.toJSON();
+        item.userId = userInfo.objectId;
+        item.phone = userInfo.phone;
+        
+        let couponRange = getCouponRange(item.couponRange)
+        let state = getCouponState(item.state)
+        let useTime = item.state == 2 ? item.updatedAt : '--'
+        let couponInfo = [i,item.couponName,couponRange,item.amount,item.createdAt,
+        item.sendBy,item.userId,item.phone,state,useTime,]
+        couponList.push(couponInfo)
+        // console.log(i)
+        // if (i == 10){
+        //     return
+        // }
+    })
+    // console.log("==========",couponList)
+    var buffer = xlsx.build([
+        {
+          name: 'sheet1',
+          data: couponList
+        }
+      ])
+    let xlsx_data = JSON.parse(JSON.stringify(buffer));
+    var parseFile = new Parse.File('coupon_record_list.xlsx', xlsx_data.data);
+    let file_url = await parseFile.save();
 
+    console.log("======file_url====",file_url._url)
+    return {status:200,url:file_url._url}
+})
 
+function getCouponState(state){
+    let stateInfo = '--'
+    switch(state){
+        case 0:
+            stateInfo = '未使用'
+            break;
+        case 1:
+            stateInfo = '已过期'
+            break;
+        case 2:
+            stateInfo = '已使用'
+            break;
+        default:
+            stateInfo = '--'
+            break;
+    }
+    return stateInfo
+}
 
-// Parse.Cloud.run('initiatePayment', {
-//     price: 10,
-// },{sessionToken: 'r:c62ec7d6a9c71a46c8f40b49b2ca7fb9'})
+function getCouponRange(type){
+    let typeInfo = ''
+    switch(type){
+        case 'all':
+            typeInfo = '全部通用'
+            break;
+        case 'blackGold':
+            typeInfo = '黑金'
+            break;
+        case 'platinum':
+            typeInfo = '铂金'
+            break;
+        case 'silver':
+            typeInfo = '白银'
+            break;
+        case 'blackGoldNew':
+            typeInfo = '黑金拉新'
+            break;
+        case 'platinumGoldNew':
+            typeInfo = '铂金拉新'
+            break;
+        case 'silverGoldNew':
+            typeInfo = '白银拉新'
+            break;
+        case 'newUser':
+            typeInfo = '注册新用户'
+            break;
+        case 'blackGoldPullNewUser':
+            typeInfo = '黑金拉新用户'
+            break;
+        case 'silverPullNewUser':
+            typeInfo = '白银拉新用户'
+            break;
+        case 'platinumPullNewUser':
+            typeInfo = '铂金拉新用户'
+            break;
+        default:
+            typeInfo = ''
+            break;
+    }
+    return typeInfo
+}
+
 
 
 

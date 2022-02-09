@@ -20,6 +20,7 @@
     "express": "^4.16.4",
     "node-fetch": "^2.5.0",
     "parse-server": "^3.3.0",
-    "weixin-pay": "^1.1.7"
+    "weixin-pay": "^1.1.7",
+    "node-xlsx": "^0.15.0"
   }
 }
