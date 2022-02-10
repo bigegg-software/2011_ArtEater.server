@@ -61,7 +61,7 @@ async function updateDailyCourse() {
 }
 
 async function getNewCouponRecordList() {
-    let data = {};
+    let data = {"search_type":"silver"};
     let query1 = new Parse.Query(NewCouponRecord);
     let query2 = new Parse.Query(NewCouponRecord);
     console.log(new Date())
@@ -101,8 +101,12 @@ async function getNewCouponRecordList() {
         item = item.toJSON()
         let couponRange = getCouponRange(item.couponRange)
         let state = getCouponState(item.state)
-        let useTime = item.state == 2 ? item.updatedAt : '--'
-        let couponInfo = [i,item.couponName,couponRange,item.amount,item.createdAt,
+        let createdAt = new Date(item.createdAt);
+        createdAt = dateFormat(createdAt,"yyyy-MM-dd HH:mm:ss")
+        let updatedAt = new Date(item.updatedAt);
+        updatedAt = dateFormat(updatedAt,"yyyy-MM-dd HH:mm:ss")
+        let useTime = item.state == 2 ? updatedAt : '--'
+        let couponInfo = [i,item.couponName,couponRange,item.amount,createdAt,
         item.sendBy,item.user.objectId,item.user.phone,state,useTime,]
         couponList.push(couponInfo)
     })
@@ -203,6 +207,25 @@ async function updateNewCouponUser() {
 
     })
 }
+const dateFormat = (date, fmt)=> {
+    let ret;
+    const opt = {
+      "y+": date.getFullYear().toString(),        // 年
+      "M+": (date.getMonth() + 1).toString(),     // 月
+      "d+": date.getDate().toString(),            // 日
+      "H+": date.getHours().toString(),           // 时
+      "m+": date.getMinutes().toString(),         // 分
+      "s+": date.getSeconds().toString()          // 秒
+      // 有其他格式化字符需求可以继续添加，必须转化成字符串
+    };
+    for (let k in opt) {
+      ret = new RegExp("(" + k + ")").exec(fmt);
+      if (ret) {
+        fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+      };
+    };
+    return fmt;
+  }
 setTimeout(async () => {
     // await importDailyCourse()
     // await updateDailyCourse();
