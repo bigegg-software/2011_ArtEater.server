@@ -1189,6 +1189,9 @@ const CoursesModule = {
         //课程列表头图
         listImg:{
             type: 'array',
+        },
+        dailyCourse:{
+            type: 'boolean',
         }
     },
     CLP: {
