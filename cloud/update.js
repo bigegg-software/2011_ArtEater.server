@@ -207,6 +207,71 @@ async function updateNewCouponUser() {
 
     })
 }
+
+//学生查询并导出
+async function getStudentList() {
+    let data = {};
+    let userQ1 = new Parse.Query(User);
+    if (data.search_keyword){
+        userQ1.contains("realname", data.search_keyword);
+    }
+    let userQ2 = new Parse.Query(User);
+    if (data.search_keyword){
+        userQ2.contains("nickName", data.search_keyword);
+    }
+    let userQ3 = new Parse.Query(User);
+    if (data.search_keyword){
+        userQ3.contains("objectId", data.search_keyword);
+    }
+    let query = Parse.Query.or(userQ1,userQ2,userQ3);
+    query.equalTo("role","student")
+    if (data.label){
+        query.contains("label", data.label)
+    }
+    if (data.search_start_date) {
+        query.greaterThan("createdAt", new Date(data.search_start_date));
+    }
+    if (data.search_end_date) {
+        query.lessThan("createdAt", new Date(new Date(data.search_end_date).getTime() + 24*60*60*1000));
+    }
+    query.descending("createdAt");
+    let array = []
+    // query.include("user");
+    let counts = await query.count();
+    for (let i = 0 ; i <= counts/1000; i ++){
+        query.skip(i*1000)
+        query.limit(1000)
+        let newDatas = await query.find()
+        array = array.concat(newDatas)
+    }
+    let userList = [];
+    let titles = ['ID','昵称', '标签', '姓名','手机号',
+    '注册时间','消费金额','积分'];
+    userList.push(titles);
+    let i = 0;
+    console.log(new Date())
+    array.map(item=>{
+        i ++;
+        item = item.toJSON()
+        let createdAt = new Date(item.createdAt);
+        createdAt = dateFormat(createdAt,"yyyy-MM-dd HH:mm:ss")
+        let userInfo = [item.objectId,item.nickName,item.label,item.realname,item.phone,
+            createdAt,item.amount,item.score]
+        userList.push(userInfo)
+    })
+    console.log(new Date())
+    var buffer = xlsx.build([
+        {
+          name: 'sheet1',
+          data: userList
+        }
+      ])
+    let xlsx_data = JSON.parse(JSON.stringify(buffer));
+    var parseFile = new Parse.File('student_list.xlsx', xlsx_data.data);
+    let file_url = await parseFile.save();
+    console.log("======file_url====",file_url._url)
+}
+
 const dateFormat = (date, fmt)=> {
     let ret;
     const opt = {
@@ -231,5 +296,6 @@ setTimeout(async () => {
     // await updateDailyCourse();
     // await getNewCouponRecordList()
     // await updateNewCouponUser()
+    // await getStudentList();
 
 }, 2000);
