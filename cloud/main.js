@@ -250,7 +250,6 @@ Parse.Cloud.define('getStudentList', async (req) => {
     }
     query.descending("createdAt");
     let array = []
-    // query.include("user");
     let counts = await query.count();
     for (let i = 0 ; i <= counts/1000; i ++){
         query.skip(i*1000)
@@ -264,15 +263,43 @@ Parse.Cloud.define('getStudentList', async (req) => {
     userList.push(titles);
     let i = 0;
     console.log(new Date())
+    let openIds = []
     array.map(item=>{
+        item = item.toJSON();
+        openIds.push(item.openid)
+    })
+    //查询所有相关订单
+    let orderQ = new Parse.Query(Order);
+    orderQ.containedIn('openId',openIds);
+    orderQ.greaterThan('cash',0)
+    let orderList = []
+    let orderCount = await orderQ.count()
+    for (let m = 0 ; m <= orderCount/1000; m ++){
+        orderQ.skip(m*1000)
+        orderQ.limit(1000)
+        let newDatas = await orderQ.find()
+        orderList = orderList.concat(newDatas)
+    }
+    for (let m = 0; m < array.length; m ++){
+        item = array[m]
         i ++;
         item = item.toJSON()
+        let openid = item.openid;
+        let amount = 0
+        let orders = orderList.filter(order=>{
+            order = order.toJSON();
+            return order.openId == openid
+        })
+        orders.map(o=>{
+            o = o.toJSON();
+            amount += o.cash
+        })
         let createdAt = new Date(item.createdAt);
         createdAt = dateFormat(createdAt,"yyyy-MM-dd HH:mm:ss")
         let userInfo = [item.objectId,item.nickName,item.label,item.realname,item.phone,
-            createdAt,item.amount,item.score]
+            createdAt,amount,item.score]
         userList.push(userInfo)
-    })
+    }
     console.log(new Date())
     var buffer = xlsx.build([
         {
