@@ -5,6 +5,7 @@ const Api = require("../utils/api.js");
 const wxpay = require("../utils/wxpay");
 let NewCouponRecord = Parse.Object.extend('NewCouponRecord')
 let User = Parse.Object.extend('_User')
+let Order = Parse.Object.extend('Order')
 const xlsx = require('node-xlsx');
 
 Parse.Cloud.define('psng', async (req) => {
